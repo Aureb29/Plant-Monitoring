@@ -7,7 +7,7 @@
  *  http://www.page.sannet.ne.jp/kenjia/index.html
  *  http://mbed.org/users/kenjiArai/
  *      Created: Feburary  21st, 2015
- *      Revised: Feburary  22nd, 2015
+ *      Revised: March      8th, 2015
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
@@ -64,9 +64,17 @@ float TSL2561::lux()
     _i2c.write((int)TSL2561_addr, (char *)dt, 1, true);
     _i2c.read(TSL2561_addr, (char *)dt, 2, false);
     ch1 = dt[1] << 8 | dt[0];
-    lux0 = ch0;
-    lux1 = ch1;
+    if (ch0 == 0xFFFF) {
+        return 2500.0;
+    }
+    lux0 = (double)ch0;
+    lux1 = (double)ch1;
     ratio = lux1 / lux0;
+    read_timing_reg();
+    lux0 *= (402.0/integ_time);
+    lux1 *= (402.0/integ_time);
+    lux0 /= gain;
+    lux1 /= gain;
     if (ratio <= 0.5) {
         dlux = 0.03040 * lux0 - 0.06200 * lux0 * pow(ratio,1.4);
     } else if (ratio <= 0.61) {
@@ -86,7 +94,49 @@ void TSL2561::init()
 {
     _i2c.frequency(100000);
     power_up();
-    read_ID();
+    set_timing_reg(TIMING_DEFAULT);
+}
+
+/////////////// Timing Register ///////////////////////////
+uint8_t TSL2561::set_timing_reg(uint8_t parameter)
+{
+    dt[0] = CMD_SINGLE + TSL2561_TIMING;
+    dt[1] = parameter;
+    _i2c.write((int)TSL2561_addr, (char *)dt, 2, false);
+    dt[0] = CMD_SINGLE + TSL2561_TIMING;
+    _i2c.write((int)TSL2561_addr, (char *)dt, 1, true);
+    _i2c.read(TSL2561_addr, (char *)dt, 1, false);
+    return dt[0];
+}
+
+uint8_t TSL2561::read_timing_reg(void)
+{
+    uint8_t i;
+
+    dt[0] = CMD_SINGLE + TSL2561_TIMING;
+    _i2c.write((int)TSL2561_addr, (char *)dt, 1, true);
+    _i2c.read(TSL2561_addr, (char *)dt, 1, false);
+    if (dt[0] & TIMING_GAIN_16){
+        gain = 16;
+    } else {
+        gain = 1;
+    }
+    i = dt[0] & 0x3;
+    switch (i) {
+        case 0:
+            integ_time = 13.7;
+            break;
+        case 1:
+            integ_time = 101.0;
+            break;
+        case 2:
+            integ_time = 402.0;
+            break;
+        default:
+            integ_time = 0;
+            break;
+    }
+    return dt[0];
 }
 
 /////////////// ID ////////////////////////////////////////

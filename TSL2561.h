@@ -7,7 +7,7 @@
  *  http://www.page.sannet.ne.jp/kenjia/index.html
  *  http://mbed.org/users/kenjiArai/
  *      Created: Feburary  21st, 2015
- *      Revised: Feburary  21st, 2015
+ *      Revised: March      8th, 2015
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
@@ -48,6 +48,15 @@
 #define TSL2561_DATA1LOW            0x0E
 #define TSL2561_DATA1HIGH           0x0F
 
+////////////// TIMING PARAMETER ///////////////////////////
+#define TIMING_GAIN_1               (0UL << 4)
+#define TIMING_GAIN_16              (1UL << 4)
+#define TIMING_TIME_13R7            (0x0)
+#define TIMING_TIME_101             (0x1)
+#define TIMING_TIME_402             (0x2)
+#define TIMING_TIME_MANU            (0x3)
+#define TIMING_DEFAULT              (TIMING_GAIN_1 + TIMING_TIME_402)
+
 ////////////// ID /////////////////////////////////////////
 #define I_AM_TSL2561                0x50
 #define REG_NO_MASK                 0x0F
@@ -69,7 +78,7 @@
  *  TSL2561      lum(dp5,dp27);    // TSL2561 SDA, SCL
  * // If you connected I2C line not only this device but also other devices,
  * //     you need to declare following method.
- *  I2C          i2c(dp5,dp27);     // SDA, SCL
+ *  I2C          i2c(dp5,dp27);    // SDA, SCL
  *  TSL2561      lum(i2c);         // TSL2561 SDA, SCL (Data available every 400mSec)
  *
  * int main() {;
@@ -103,11 +112,17 @@ public:
       */
     float lux(void);
 
-    /** Set config register
-      * @param config parameter
-      * @return config read data
+    /** Set timing register
+      * @param timing parameter
+      * @return timing read data
       */
-    uint16_t set_config(uint16_t cfg);
+    uint8_t set_timing_reg(uint8_t parameter);
+
+    /** Read timing register
+      * @param timing parameter
+      * @return timing read data
+      */
+    uint8_t read_timing_reg(void);
 
     /** Set I2C clock frequency
       * @param freq.
@@ -142,9 +157,11 @@ protected:
 private:
     uint8_t  TSL2561_addr;
     uint8_t  dt[4];
-    uint16_t ch0;
-    uint16_t ch1;
-    uint8_t id_number;
+    uint32_t ch0;
+    uint32_t ch1;
+    int8_t   gain;
+    uint8_t  id_number;
+    double   integ_time;
 };
 
 #endif      // TSL2561_H
