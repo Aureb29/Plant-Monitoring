@@ -3,17 +3,11 @@
  *  Luminosity sensor -- LIGHT-TO-DIGITAL CONVERTER (light intensity to a digital signal output)
  *  TSL2561 by Texas Advanced Optoelectronic Solutions Inc.
  *
- * Copyright (c) 2015 Kenji Arai / JH1PJL
+ * Copyright (c) 2015,'17 Kenji Arai / JH1PJL
  *  http://www.page.sannet.ne.jp/kenjia/index.html
  *  http://mbed.org/users/kenjiArai/
- *      Created: Feburary  21st, 2015
- *      Revised: March      8th, 2015
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
- * AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *      Created: Feburary   21st, 2015
+ *      Revised: August     23rd, 2017
  */
 /*
  *---------------- REFERENCE ----------------------------------------------------------------------
@@ -150,7 +144,8 @@ public:
     void power_down(void);
 
 protected:
-    I2C  _i2c;
+    I2C *_i2c_p;
+    I2C &_i2c;
 
     void init(void);
 

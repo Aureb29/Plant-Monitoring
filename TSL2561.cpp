@@ -3,40 +3,38 @@
  *  Luminosity sensor -- LIGHT-TO-DIGITAL CONVERTER (light intensity to a digital signal output)
  *  TSL2561 by Texas Advanced Optoelectronic Solutions Inc.
  *
- * Copyright (c) 2015 Kenji Arai / JH1PJL
+ * Copyright (c) 2015,'17 Kenji Arai / JH1PJL
  *  http://www.page.sannet.ne.jp/kenjia/index.html
  *  http://mbed.org/users/kenjiArai/
- *      Created: Feburary  21st, 2015
- *      Revised: March      8th, 2015
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
- * AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *      Created: Feburary   21st, 2015
+ *      Revised: August     23rd, 2017
  */
 
 #include "TSL2561.h"
 
-TSL2561::TSL2561 (PinName p_sda, PinName p_scl) : _i2c(p_sda, p_scl)
+TSL2561::TSL2561 (PinName p_sda, PinName p_scl)
+ : _i2c_p(new I2C(p_sda, p_scl)), _i2c(*_i2c_p)
 {
     TSL2561_addr = TSL2561_ADDRESS_GND;
     init();
 }
 
-TSL2561::TSL2561 (PinName p_sda, PinName p_scl, uint8_t addr) : _i2c(p_sda, p_scl)
+TSL2561::TSL2561 (PinName p_sda, PinName p_scl, uint8_t addr)
+ : _i2c_p(new I2C(p_sda, p_scl)), _i2c(*_i2c_p)
 {
     TSL2561_addr = addr;
     init();
 }
 
-TSL2561::TSL2561 (I2C& p_i2c) : _i2c(p_i2c)
+TSL2561::TSL2561 (I2C& p_i2c)
+ : _i2c(p_i2c)
 {
     TSL2561_addr = TSL2561_ADDRESS_GND;
     init();
 }
 
-TSL2561::TSL2561 (I2C& p_i2c, uint8_t addr) : _i2c(p_i2c)
+TSL2561::TSL2561 (I2C& p_i2c, uint8_t addr)
+ : _i2c(p_i2c)
 {
     TSL2561_addr = addr;
     init();
@@ -179,3 +177,4 @@ void TSL2561::frequency(int hz)
 {
     _i2c.frequency(hz);
 }
+
