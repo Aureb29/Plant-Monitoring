@@ -9,37 +9,37 @@
  *      Created: Feburary   21st, 2015
  *      Revised: August     23rd, 2017
  */
-
+ 
 #include "TSL2561.h"
-
+ 
 TSL2561::TSL2561 (PinName p_sda, PinName p_scl)
  : _i2c_p(new I2C(p_sda, p_scl)), _i2c(*_i2c_p)
 {
     TSL2561_addr = TSL2561_ADDRESS_GND;
     init();
 }
-
+ 
 TSL2561::TSL2561 (PinName p_sda, PinName p_scl, uint8_t addr)
  : _i2c_p(new I2C(p_sda, p_scl)), _i2c(*_i2c_p)
 {
     TSL2561_addr = addr;
     init();
 }
-
+ 
 TSL2561::TSL2561 (I2C& p_i2c)
  : _i2c(p_i2c)
 {
     TSL2561_addr = TSL2561_ADDRESS_GND;
     init();
 }
-
+ 
 TSL2561::TSL2561 (I2C& p_i2c, uint8_t addr)
  : _i2c(p_i2c)
 {
     TSL2561_addr = addr;
     init();
 }
-
+ 
 /////////////// Read Lux from sensor //////////////////////
 /*
 For 0    < CH1/CH0 < 0.50 Lux = 0.0304  x CH0-0.062  x CH0 x ((CH1/CH0)1.4)
@@ -53,7 +53,7 @@ float TSL2561::lux()
     double lux0, lux1;
     double ratio;
     double dlux;
-
+ 
     dt[0] = CMD_MULTI + TSL2561_DATA0LOW;
     _i2c.write((int)TSL2561_addr, (char *)dt, 1, true);
     _i2c.read(TSL2561_addr, (char *)dt, 2, false);
@@ -86,7 +86,7 @@ float TSL2561::lux()
     }
     return (float)dlux;
 }
-
+ 
 /////////////// Initialize ////////////////////////////////
 void TSL2561::init()
 {
@@ -94,7 +94,7 @@ void TSL2561::init()
     power_up();
     set_timing_reg(TIMING_DEFAULT);
 }
-
+ 
 /////////////// Timing Register ///////////////////////////
 uint8_t TSL2561::set_timing_reg(uint8_t parameter)
 {
@@ -106,11 +106,11 @@ uint8_t TSL2561::set_timing_reg(uint8_t parameter)
     _i2c.read(TSL2561_addr, (char *)dt, 1, false);
     return dt[0];
 }
-
+ 
 uint8_t TSL2561::read_timing_reg(void)
 {
     uint8_t i;
-
+ 
     dt[0] = CMD_SINGLE + TSL2561_TIMING;
     _i2c.write((int)TSL2561_addr, (char *)dt, 1, true);
     _i2c.read(TSL2561_addr, (char *)dt, 1, false);
@@ -136,7 +136,7 @@ uint8_t TSL2561::read_timing_reg(void)
     }
     return dt[0];
 }
-
+ 
 /////////////// ID ////////////////////////////////////////
 uint16_t TSL2561::read_ID()
 {
@@ -146,7 +146,7 @@ uint16_t TSL2561::read_ID()
     id_number = dt[0] << 8 | dt[1];
     return id_number;
 }
-
+ 
 uint8_t TSL2561::who_am_i()
 {
     read_ID();
@@ -156,7 +156,7 @@ uint8_t TSL2561::who_am_i()
         return 0;
     }
 }
-
+ 
 /////////////// Power ON/OFF //////////////////////////////
 void TSL2561::power_up()
 {
@@ -164,17 +164,19 @@ void TSL2561::power_up()
     dt[1] = 3;
     _i2c.write((int)TSL2561_addr, (char *)dt, 2, false);
 }
-
+ 
 void TSL2561::power_down()
 {
     dt[0] = CMD_SINGLE + TSL2561_CONTROL;
     dt[1] = 0;
     _i2c.write((int)TSL2561_addr, (char *)dt, 2, false);
 }
-
+ 
 /////////////// I2C Freq. /////////////////////////////////
 void TSL2561::frequency(int hz)
 {
     _i2c.frequency(hz);
 }
-
+ 
+ 
+       
