@@ -81,23 +81,23 @@ float DS18B20::calculateTemperature(BYTE* data)
     {
         case nineBit:    // 0.5 deg C increments
             read_temp &= 0xFFF8;                // bits 2,1,0 are undefined
-             pc_ds18B20.traceOut("9 bit resolution ...\r\n");
+            // pc_ds18B20.traceOut("9 bit resolution ...\r\n");
             break;
         case tenBit:     // 0.25 deg C increments
             read_temp &= 0xFFFC;                // bits 1,0 are undefined
-            pc_ds18B20.traceOut("10 bit resolution ...\r\n");
+            //pc_ds18B20.traceOut("10 bit resolution ...\r\n");
             break;
         case elevenBit:  // 0.125 deg C increments
             read_temp &= 0xFFFE;                // bit 0 is undefined
-            pc_ds18B20.traceOut("11 bit resolution ...\r\n");
+            //pc_ds18B20.traceOut("11 bit resolution ...\r\n");
             break;
         case twelveBit:  // 0.0625 deg C increments
-            pc_ds18B20.traceOut("12 bit resolution ...\r\n");
+            //pc_ds18B20.traceOut("12 bit resolution ...\r\n");
             break;
     }
     float realTemp = (float)read_temp/16 ;
                  
-    pc_ds18B20.traceOut("TEMP_READ/REAL TEMP: %f \r\n", realTemp); 
+    //pc_ds18B20.traceOut("TEMP_READ/REAL TEMP: %f \r\n", realTemp); 
                
     return realTemp;
 }

@@ -56,7 +56,7 @@ bool OneWireThermometer::initialize()
         pc.traceOut("Address = ");
         for (int i = 0; i < ADDRESS_SIZE; i++) 
         {
-            pc.traceOut("%x ", (int)address[i]);
+           pc.traceOut("%x ", (int)address[i]);
         }
         pc.traceOut("\r\n");
         
@@ -115,14 +115,14 @@ bool OneWireThermometer::readAndValidateData(BYTE* data)
     resetAndAddress();
     oneWire.writeByte(READSCRATCH);    // read Scratchpad
 
-    pc.traceOut("read = ");
+  //  pc.traceOut("read = ");
     for (int i = 0; i < THERMOM_SCRATCHPAD_SIZE; i++) 
     {               
         // we need all bytes which includes CRC check byte
         data[i] = oneWire.readByte();
-        pc.traceOut("%x ", (int)data[i]);
+       // pc.traceOut("%x ", (int)data[i]);
     }
-    pc.traceOut("\r\n");
+    //pc.traceOut("\r\n");
 
     // Check CRC is valid if you want to
     if (useCRC && !(OneWireCRC::crc8(data, THERMOM_CRC_BYTE) == data[THERMOM_CRC_BYTE]))  
