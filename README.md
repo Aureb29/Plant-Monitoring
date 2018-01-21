@@ -12,3 +12,5 @@ In this project we are using a Sigfox module called the Snootlab.
 This module allows us to send data to the cloud that are then collectable on Actoboard.
 Actoboard is a platform on which you can edit dashboards to overview all your data in one place.
 It also allows us to forward the information to other websites.
+
+![alt tag](https://user-images.githubusercontent.com/31851288/35196651-446d266a-fed5-11e7-87d6-69debb05b10d.png)
