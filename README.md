@@ -13,4 +13,8 @@ This module allows us to send data to the cloud that are then collectable on Act
 Actoboard is a platform on which you can edit dashboards to overview all your data in one place.
 It also allows us to forward the information to other websites.
 
+1. First of all we want to acquire the data from our sensors. 
+To do so we chose to use Mbed to program our NUCLEO-L432KC.
+In order to acquire the sensors values on our microprocessor we used a Labdeck Bread Board and connected the sensors pins to the NUCLEO pins.
 ![alt tag](https://user-images.githubusercontent.com/31851288/35196651-446d266a-fed5-11e7-87d6-69debb05b10d.png)
+The 
