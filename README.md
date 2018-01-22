@@ -13,7 +13,7 @@ This module allows us to send data to the cloud that are then collectable on Act
 Actoboard is a platform on which you can edit dashboards to overview all your data in one place.
 It also allows us to forward the information to other websites.
 
-1. First of all we want to acquire the data from our sensors. 
+## 1. First of all we want to acquire the data from our sensors. 
 
 To do so we chose to use Mbed to program our NUCLEO-L432KC.
 In order to acquire the sensors values on our microprocessor we used a Labdeck Bread Board and connected the sensors pins to the NUCLEO pins.
@@ -27,7 +27,7 @@ For all sensors we chose to power them all with the 3V3 pin of the NUCLEO and to
 
 To read the values we are receiving, we need to do a printf of the sensor' values to the serial port to analyse with Putty for exemple.
 
-2. Then we want to read the values on the screen the SSD1306.
+## 2. Then we want to read the values on the screen the SSD1306.
 
 The screen is added on the Labdeck and we want to connect his pins to the NUCLEO.
 - The CS pin of the screen is connected to the D3 of the microprocessor.
@@ -38,7 +38,7 @@ The screen is added on the Labdeck and we want to connect his pins to the NUCLEO
 
 The power and ground are with the 3V3 and the GND of the NUCLEO like the sensors.
 
-3. Now that we have all the data collected and printed on the screen we want to send them with our Snootlab to use them on the Internet.
+## 3. Now that we have all the data collected and printed on the screen we want to send them with our Snootlab to use them on the Internet.
 
 The first thing to do in order to be able to use your snootlab module and receive data on actoboard 
 To do this, click on the tab "New data source" then on "Akeru". 
@@ -63,7 +63,7 @@ Select the module that sent the data and then go to "Settings" where all the rig
 Last thing to add in the "settings"tab, the "Forwarding URL" checkbox will be the way to retrieve data from node-red.
 ![alt tag](https://user-images.githubusercontent.com/31851288/35219791-4701bfc2-ff74-11e7-8c7c-186c345006c6.PNG)
 
-4. From Actoboard you can post the data received from the Sigfox.
+## 4. From Actoboard you can post the data received from the Sigfox.
 
 The first step to recover sigfox data on Node-red is to add an http node and perform a POST on the sigfox address. 
 
@@ -71,7 +71,7 @@ Once the POST is completed, Node-red will receive the expected but concatenated 
 
 We have installed the "Dashboard" package which is a graphical interface for Node-red and interesting to make graphics or display values. Each value is displayed on our dashboard with underneath its history over the last hours.  
 
-5. PCB 
+## 5. PCB 
 
 Once we have made sure that the sensors work correctly, that the sensor data is sent from the snootlab and that they are received on node-red, we can proceed to the realization of the PCB.
 Instead of having a labdec insert that takes up a bit of space, we made our own PCB to be able to place it in a case later on, we chose KiCad as the software to make our PCB, you will find below a link to get you started with this software: 
