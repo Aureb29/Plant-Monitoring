@@ -66,10 +66,13 @@ Last thing to add in the "settings"tab, the "Forwarding URL" checkbox will be th
 ## 4. From Actoboard you can post the data received from the Sigfox.
 
 The first step to recover sigfox data on Node-red is to add an http node and perform a POST on the sigfox address. 
+![alt tag](https://user-images.githubusercontent.com/31851288/35232395-a4922cea-ff9b-11e7-9956-c0256cb562ed.PNG)
 
 Once the POST is completed, Node-red will receive the expected but concatenated values. That's why we wrote several small functions in order to retrieve each value individually and be able to manipulate it. 
+![alt tag](https://user-images.githubusercontent.com/31851288/35232397-a4f8667c-ff9b-11e7-9929-d947176bb402.PNG)
 
-We have installed the "Dashboard" package which is a graphical interface for Node-red and interesting to make graphics or display values. Each value is displayed on our dashboard with underneath its history over the last hours.  
+We have installed the "Dashboard" package which is a graphical interface for Node-red and interesting to make graphics or display values. Each value is displayed on our dashboard with underneath its history over the last hours.
+![alt tag](https://user-images.githubusercontent.com/31851288/35232396-a4c7c1ac-ff9b-11e7-8203-78661f8c7d2f.PNG)
 
 ## 5. PCB 
 
