@@ -72,7 +72,6 @@ Once the POST is completed, Node-red will receive the expected but concatenated 
 ![alt tag](https://user-images.githubusercontent.com/31851288/35232397-a4f8667c-ff9b-11e7-9929-d947176bb402.PNG)
 
 We have installed the "Dashboard" package which is a graphical interface for Node-red and interesting to make graphics or display values. Each value is displayed on our dashboard with underneath its history over the last hours.
-![alt tag](https://user-images.githubusercontent.com/31851288/35232396-a4c7c1ac-ff9b-11e7-8203-78661f8c7d2f.PNG)
 
 ## 5. PCB 
 
