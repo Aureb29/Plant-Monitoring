@@ -40,6 +40,12 @@ The power and ground are with the 3V3 and the GND of the NUCLEO like the sensors
 
 3. Now that we have all the data collected and printed on the screen we want to send them with our Snootlab to use them on the Internet.
 
+The first thing to do in order to be able to use your snootlab module and receive data on actoboard 
+To do this, click on the tab "New data source" then on "Akeru". 
+It is now up to you to enter your parameters. 
+Here is an example below of the parameterization of the received data that we have carried out because it is a very important part for the reception of the data. 
+We have defined our 5 variables that we will receive from the following form: variable:: uint8 which means that the received value will be an int 8. The small i to the right of the Data format box allows you to have information about other possibilities such as receiving float or boolean or to choose 8 or 16 bits. 
+
 The Snootlab module is also added on the Labdeck.
 The power system is the same as the one for the sensors and the screen.
 The RX pin of the Snootlab is connected to the PA 2 pin and the TX to the pin PA 3.
@@ -48,5 +54,17 @@ The message of the printf needs to begin by "AT$SS" to tell sigfox you are sendi
 Then you need to send you data as an hexa value.
 You can now receive this data on Actoboard.
 
+To verify that the data has been received, you just have to go back to the board, select the module that sent the data and then go to "Settings" where all the right part called latest messages will correspond to all the received messages (with in detail the time and the day of the reception as well as the value of the sensors).
+Last thing to add in the "settings"tab, the "Forwarding URL" checkbox will be the way to retrieve data from node-red.  
+
 4. From Actoboard you can post the data received from the Sigfox.
+
+the first step to recover sigfox data on Node-red is to add an http node and perform a POST on the sigfox address. 
+Once the POST is completed, Node-red will receive the expected but concatenated values. That's why we wrote several small functions in order to retrieve each value individually and be able to manipulate it. 
+We have installed the "Dashboard" package which is a graphical interface for Node-red and interesting to make graphics or display values. Each value is displayed on our dashboard with underneath its history over the last hours.  
+
+5. PCB 
+
+Once we have made sure that the sensors work correctly, that the sensor data is sent from the snootlab and that they are received on node-red, we can proceed to the realization of the PCB. Instead of having a labdec insert that takes up a bit of space, we made our own PCB to be able to place it in a case later on, we chose KiCad as the software to make our PCB, you will find below a link to get you started with this software: 
+http://kicad-pcb.org/help/getting-started/
 
