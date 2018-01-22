@@ -49,4 +49,8 @@ Then you need to send you data as an hexa value.
 You can now receive this data on Actoboard.
 
 4. From Actoboard you can post the data received from the Sigfox.
+![alt tag](https://user-images.githubusercontent.com/31851288/35219780-40b5b4e8-ff74-11e7-8167-dae878cf41e2.PNG)
 
+![alt tag](https://user-images.githubusercontent.com/31851288/35219783-43b839ea-ff74-11e7-95c8-9e09063858b9.PNG)
+
+![alt tag](https://user-images.githubusercontent.com/31851288/35219791-4701bfc2-ff74-11e7-8c7c-186c345006c6.PNG)
