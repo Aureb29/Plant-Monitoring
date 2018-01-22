@@ -56,18 +56,23 @@ You can now receive this data on Actoboard.
 
 To verify that the data has been received, you just have to go back to the board.
 ![alt tag](https://user-images.githubusercontent.com/31851288/35219780-40b5b4e8-ff74-11e7-8167-dae878cf41e2.PNG)
+
 Select the module that sent the data and then go to "Settings" where all the right part called latest messages will correspond to all the received messages (with in detail the time and the day of the reception as well as the value of the sensors).
 ![alt tag](https://user-images.githubusercontent.com/31851288/35219783-43b839ea-ff74-11e7-95c8-9e09063858b9.PNG)
+
 Last thing to add in the "settings"tab, the "Forwarding URL" checkbox will be the way to retrieve data from node-red.
 ![alt tag](https://user-images.githubusercontent.com/31851288/35219791-4701bfc2-ff74-11e7-8c7c-186c345006c6.PNG)
 
 4. From Actoboard you can post the data received from the Sigfox.
 
 The first step to recover sigfox data on Node-red is to add an http node and perform a POST on the sigfox address. 
+
 Once the POST is completed, Node-red will receive the expected but concatenated values. That's why we wrote several small functions in order to retrieve each value individually and be able to manipulate it. 
+
 We have installed the "Dashboard" package which is a graphical interface for Node-red and interesting to make graphics or display values. Each value is displayed on our dashboard with underneath its history over the last hours.  
 
 5. PCB 
 
-Once we have made sure that the sensors work correctly, that the sensor data is sent from the snootlab and that they are received on node-red, we can proceed to the realization of the PCB. Instead of having a labdec insert that takes up a bit of space, we made our own PCB to be able to place it in a case later on, we chose KiCad as the software to make our PCB, you will find below a link to get you started with this software: 
+Once we have made sure that the sensors work correctly, that the sensor data is sent from the snootlab and that they are received on node-red, we can proceed to the realization of the PCB.
+Instead of having a labdec insert that takes up a bit of space, we made our own PCB to be able to place it in a case later on, we chose KiCad as the software to make our PCB, you will find below a link to get you started with this software: 
 http://kicad-pcb.org/help/getting-started/
